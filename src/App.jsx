@@ -1,13 +1,11 @@
-import React from 'react'
-import Navbar from './components/Navbar'
-import Hero from './pages/Hero'
+import Hero from "./pages/Hero"
+import Index from "./routes"
 
 const App = () => {
   return (
-    <div className=''>
-       <Navbar />
-       <Hero />
-    </div>
+      <div className=''>
+        <Index /> 
+      </div>
   )
 }
 
