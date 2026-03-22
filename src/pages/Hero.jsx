@@ -1,47 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
 
 const Hero = () => {
   const [km, setKm] = useState(5);
-  const [position, setPosition] = useState({
-    positionA: {
-      lat: 0,
-      lng: 0,
-    },
-    positionB: {
-      lat: 0,
-      lng: 0,
-    },
-    positionC: {
-      lat: 0,
-      lng: 0,
-    },
-  });
-
-  const distance = km / 3 / 111;
   const navigate = useNavigate();
-
-  // extracting user's current location using geolocation api
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((CurrPosi) => {
-      setPosition((prev) => ({
-        ...prev,
-        positionA: {
-          lat: CurrPosi.coords.latitude,
-          lng: CurrPosi.coords.longitude,
-        },
-        positionB: {
-          lat: CurrPosi.coords.latitude + distance,
-          lng: CurrPosi.coords.longitude,
-        },
-        positionC: {
-          lat: CurrPosi.coords.latitude,
-          lng: CurrPosi.coords.longitude + distance,
-        },
-      }));
-    });
-  }, []);
 
   function IncreaseKmByOne() {
     setKm((prev) => prev + 1);
@@ -108,10 +70,7 @@ const Hero = () => {
               <button
                 onClick={() =>
                   navigate("/route-planner", {
-                    state: {
-                      currLoc: { position, km: Number(km) },
-                      desiredKm: km,
-                    },
+                    state: { desiredKm: km },
                   })
                 }
                 className="text-black px-2 sm:px-10 md:px-20 py-3 text-xl bg-[#ceff00] rounded-sm whitespace-nowrap"
